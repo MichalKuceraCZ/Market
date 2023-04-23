@@ -4,7 +4,7 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head />
-      <body className={"w-full h-screen p-6"}>
+      <body>
         <Main />
         <NextScript />
       </body>
