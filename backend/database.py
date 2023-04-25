@@ -18,6 +18,7 @@ engine = create_async_engine(SQLALCHEMY_DATABASE_URL, echo=True, future=True)
 
 async def init_db():
     from models.User import User
+    from models.Category import Category
 
     async with engine.begin() as conn:
         # await conn.run_sync(SQLModel.metadata.drop_all)
