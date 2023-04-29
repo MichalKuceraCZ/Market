@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Body
+from fastapi import FastAPI, Body, status
 
 from database import init_db
 
@@ -19,5 +19,5 @@ async def index():
 
 
 @app.get("/login")
-async def get_market():
-    return market_list
+async def login():
+    return login
