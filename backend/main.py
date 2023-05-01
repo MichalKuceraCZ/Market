@@ -1,5 +1,7 @@
-from fastapi import FastAPI, Body, status
+from fastapi import FastAPI
+from sqlalchemy.ext.asyncio import async_session
 
+from backend.services import UserService
 from database import init_db
 
 app = FastAPI()
@@ -21,3 +23,11 @@ async def index():
 @app.get("/login")
 async def login():
     return login
+
+
+async def get_user_service():
+    async with async_session() as session:
+        async with session.begin():
+            yield UserService(session)
+
+include_router(user_router, prefix="/api/v1")
