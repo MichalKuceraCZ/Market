@@ -2,9 +2,10 @@ from fastapi import APIRouter, Body, Depends, HTTPException
 from starlette import status
 from starlette.responses import Response
 
-from backend.main import get_user_service
-from backend.request import UserCreateRequest, LoginRequest
-from backend.services import UserService
+from backend.request.LoginRequest import LoginRequest
+from backend.request.UserCreateRequest import UserCreateRequest
+from backend.services.UserDatabaseService import get_user_service
+from backend.services.UserService import UserService
 
 user_router = APIRouter(
     prefix="/users",
