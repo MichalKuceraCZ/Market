@@ -1,15 +1,14 @@
 from typing import Annotated
 
-from fastapi import APIRouter, Query, Depends, Body, HTTPException
-from fastapi.openapi.models import Response
-from starlette import status
+from fastapi import APIRouter, Depends, Query, status, Body, HTTPException, Response
+
 
 from backend.errors.ErrosResponse import ErrorResponse
 from backend.exceptions import TodoDuplicationException
 from backend.models import Todo
-from backend.request import TodoCreateRequest
-from backend.response import CreateTodoRequest
-from backend.services import TodoService
+from backend.request import CreateTodoRequest
+from backend.request.TodoCreateRequest import TodoCreateRequest
+from backend.services.TodoService import TodoService
 from backend.services.UserDatabaseService import get_todo_service
 
 todo_router = APIRouter(

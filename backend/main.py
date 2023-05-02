@@ -1,10 +1,10 @@
 from typing import Optional
-
 from fastapi import FastAPI
 from pydantic import BaseModel
 
 from backend.controllers.TodoControllers import todo_router
 from backend.controllers.UserController import user_router
+from backend.controllers.UserTodoControler import user_todo_router
 from backend.errors.ErrorHandlers import register_error_handlers
 from database import init_db
 
