@@ -1,8 +1,7 @@
-from sqlmodel import SQLModel
-
+from dotenv import dotenv_values
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.orm import sessionmaker
-from dotenv import dotenv_values
+from sqlmodel import SQLModel
 
 config = dotenv_values("./.env")
 username = config.get("DB_USERNAME")
@@ -18,7 +17,7 @@ engine = create_async_engine(SQLALCHEMY_DATABASE_URL, echo=True, future=True)
 
 async def init_db():
     from models.User import User
-    from models.Category import Category
+    from models.Todo import Todo
 
     async with engine.begin() as conn:
         # await conn.run_sync(SQLModel.metadata.drop_all)

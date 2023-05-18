@@ -1,12 +1,11 @@
 import datetime
-from typing import Optional
 
-from sqlalchemy import UniqueConstraint
-from sqlmodel import SQLModel, Field, Relationship
+from sqlmodel import SQLModel, Field, UniqueConstraint, Relationship
+from typing import Optional
 
 import sqlalchemy as sa
 
-from backend.models import User
+from models.User import User
 
 
 class Todo(SQLModel, table=True):

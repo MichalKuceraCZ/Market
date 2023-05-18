@@ -1,7 +1,8 @@
 import datetime
-from typing import Optional
 
 from sqlmodel import SQLModel, Field, Relationship
+from typing import Optional
+
 import sqlalchemy as sa
 
 
@@ -21,7 +22,3 @@ class User(SQLModel, table=True):
 
     passwords: list["UserPassword"] = Relationship(back_populates="user", sa_relationship_kwargs={"lazy": "joined"})
     todos: list["Todo"] = Relationship(back_populates="user", sa_relationship_kwargs={"lazy": "joined"})
-
-
-def user_id():
-    return None

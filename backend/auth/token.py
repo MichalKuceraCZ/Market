@@ -1,5 +1,4 @@
 from datetime import datetime, timedelta
-
 from dotenv import dotenv_values
 from pydantic import BaseModel
 from jose import jwt
@@ -7,15 +6,16 @@ from jose import jwt
 ALGORITHM = "HS256"
 config_data = dotenv_values("./.env")
 SECRET_KEY = config_data.get("SECRET_KEY")
+ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
 
 class Token(BaseModel):
-    access_token: str
-    token_type: str
+    access_token: bytes
+    token_type: bytes
 
 
 class TokenData(Token):
-    username: str
+    username: bytes
 
 
 def create_access_token(data: dict):

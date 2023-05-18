@@ -1,15 +1,17 @@
+from fastapi import APIRouter
+
+from fastapi import Body, HTTPException, status, Response, Depends, Query
 from typing import Annotated
 
-from fastapi import APIRouter, Depends, Query, status, Body, HTTPException, Response
+from deps import get_todo_service
+from errors.ErrosResponse import ErrorResponse
+from exceptions.TodoDuplicationException import TodoDuplicationException
+from models.Todo import Todo
+from request.CreateTodoRequest import CreateTodoRequest
+from services.TodoService import TodoService
 
 
-from backend.errors.ErrosResponse import ErrorResponse
-from backend.exceptions import TodoDuplicationException
-from backend.models import Todo
-from backend.request import CreateTodoRequest
-from backend.request.TodoCreateRequest import TodoCreateRequest
-from backend.services.TodoService import TodoService
-from backend.services.UserDatabaseService import get_todo_service
+# http://localhost:8000/api/v1/todos
 
 todo_router = APIRouter(
     prefix="/todos",
@@ -98,7 +100,7 @@ async def delete_todo(
 @todo_router.patch("/", status_code=status.HTTP_204_NO_CONTENT)
 async def update_todo(
         *,
-        new_todo: TodoCreateRequest = Body(),
+        new_todo: CreateTodoRequest = Body(),
         todo_service: TodoService = Depends(get_todo_service)):
     print("Toto je update")
     await todo_service.update_todo(new_todo)

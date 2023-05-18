@@ -1,9 +1,10 @@
 from datetime import datetime
 
-import sqlmodel as sa
 from sqlmodel import SQLModel, Field, Relationship
 
-from backend.models import User
+import sqlalchemy as sa
+
+from models.User import User
 
 
 class UserPassword(SQLModel, table=True):

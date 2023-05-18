@@ -1,10 +1,11 @@
-from fastapi import Depends, HTTPException
+from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 from pydantic import BaseModel
-from starlette import status
+from jose import jwt, JWTError
 
-from backend.services import UserService
-from backend.services.UserDatabaseService import get_user_service
+from auth.token import SECRET_KEY, ALGORITHM
+from deps import get_user_service
+from services.UserService import UserService
 
 oauth2_schema = OAuth2PasswordBearer(tokenUrl="token")
 

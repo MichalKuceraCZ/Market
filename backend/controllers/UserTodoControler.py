@@ -1,12 +1,11 @@
+from fastapi import APIRouter, status, Body, Depends, HTTPException
 
-
-from fastapi import APIRouter, Body, Depends, HTTPException
-from starlette import status
-
-from backend.exceptions import TodoDuplicationException
-from backend.response import CreateTodoRequest, GetByUsernameResponse
-from backend.services import UserTodoService
-from backend.services.UserDatabaseService import get_user_todo_service
+from auth.user import get_current_user
+from deps import get_user_todo_service
+from exceptions.TodoDuplicationException import TodoDuplicationException
+from request.CreateTodoRequest import CreateTodoRequest
+from response.GetByUsernameResponse import GetByUsernameResponse
+from services.UserTodoService import UserTodoService
 
 user_todo_router = APIRouter(
     prefix="/users/todos",

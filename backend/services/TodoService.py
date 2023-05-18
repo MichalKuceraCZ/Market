@@ -1,8 +1,10 @@
+from sqlmodel import Session, select, delete, update
+from sqlalchemy import exc
 import asyncpg
-from sqlmodel import Session
 
-from backend.exceptions.TodoDuplicationException import TodoDuplicationException
-from backend.response import CreateTodoRequest
+from exceptions.TodoDuplicationException import TodoDuplicationException
+from models.Todo import Todo
+from request.CreateTodoRequest import CreateTodoRequest
 
 
 class TodoService:
@@ -62,7 +64,7 @@ class TodoService:
         await self.session.execute(query)
         await self.session.commit()
 
-    async def update_todo(self, todo: TodoCreateRequest):
+    async def update_todo(self, todo: CreateTodoRequest):
         query = (
             update(Todo)
             .values(label=todo.label)
@@ -71,3 +73,8 @@ class TodoService:
 
         await self.session.execute(query)
         await self.session.commit()
+
+        # todo = Todo() # epic query ktere mi to ziska
+        # todo.label = todo.label
+# micro task Queue
+# setTimeout, Promise

@@ -2,12 +2,14 @@ import datetime
 
 from sqlmodel import Session, select
 
-from backend.auth.password import hash_password, verify_password
-from backend.exceptions.UserNotFoundException import UserNotFoundException
-from backend.models import UserPassword
-from backend.models.User import User
-from backend.request import UserCreateRequest, LoginRequest, ChangePasswordRequest
-from backend.response import GetByUsernameResponse
+from auth.password import hash_password, verify_password
+from exceptions.UserNotFoundException import UserNotFoundException
+from models.User import User
+from models.UserPassword import UserPassword
+from request.ChangePasswordRequest import ChangePasswordRequest
+from request.LoginRequest import LoginRequest
+from request.UserCreateRequest import UserCreateRequest
+from response.GetByUsernameResponse import GetByUsernameResponse
 
 
 class UserService:
@@ -71,3 +73,12 @@ class UserService:
         user_password.updated_at = datetime.datetime.now()
 
         await self.session.commit()
+
+        # query = (
+
+        #     update(UserPassword)
+        #     .values(value=hash_password(data.new_password), updated_at=datetime.datetime.now())
+        #     .where(UserPassword.user_id == user.user_id)
+        # )
+        #
+        # await self.session.execute(query)
