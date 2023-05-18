@@ -33,3 +33,4 @@ app.include_router(user_router, prefix="/api/v1")
 app.include_router(user_todo_router, prefix="/api/v1")
 
 register_error_handlers(app)
+
